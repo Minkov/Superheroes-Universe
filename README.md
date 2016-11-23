@@ -113,3 +113,4 @@ Create an application about superheroes :)
 - Use promises for your data layer
   - Provides a cleaner and consisten way for interactions with the database
 - Consider using JSON.stringify and JSON.parse methods to create jsObject from json string or vice versa.
+
