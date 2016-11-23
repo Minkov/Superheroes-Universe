@@ -1,0 +1,12 @@
+extends _layout
+
+block content
+    h1
+        a(href= "/superheroes/" + model.id) 
+            = model.name + " (" + model.secretIdentity + ")"
+    img.superhero-avatar(src=model.imageUrl)
+    br
+    a(href= "/superheroes?alignment=" + model.alignment) 
+        =   model.alignment
+    p
+        =   model.story

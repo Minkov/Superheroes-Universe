@@ -1,0 +1,35 @@
+include mixins/nav
+
+<!DOCTYPE html>
+html(lang="en")
+head
+    meta(charset="UTF-8")
+    title The Superheroes Universe: 
+        block site-title
+    link(rel="stylesheet", href="/static/bower_components/bootstrap/dist/css/bootstrap.css")
+    link(rel="stylesheet", href="/static/css/main.css")
+    block styles
+
+    script(src="/static/bower_components/jquery/dist/jquery.js")
+    script(src="/static/bower_components/bootstrap/dist/js/bootstrap.js")
+
+    block headScripts
+body
+    header
+        +site-navigation
+
+        //- nav
+        //-     ul
+        //-         li
+        //-             a(href="/") Home
+        //-         li
+        //-             a(href="/superheroes") Superheroes
+        //-         li
+        //-             a(href="/fractions") Fractions
+        //-         if result.Fser
+        //-             li
+        //-                 a(href="/profile") Profile
+    #content
+        block content
+    footer
+    h2 Telerik Academy 2016

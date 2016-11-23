@@ -1,0 +1,8 @@
+extends _layout
+
+block content
+    ul.list
+        each fraction in model
+            li
+                a(href="/fractions/" + fraction.id)
+                    =   fraction.name

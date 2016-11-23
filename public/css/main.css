@@ -1,0 +1,36 @@
+img {
+  max-width: 100%;
+}
+.list {
+  list-style-type: none;
+}
+.list li {
+  margin-top: 15px;
+}
+.list .list-item-container {
+  display: inline-block;
+  position: relative;
+}
+.list .hero-info {
+  width: 100%;
+  padding: 15px 5px;
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  color: #fff;
+}
+a.alignment.Good,
+a.alignment.good {
+  color: #008000;
+}
+a.alignment.Evil,
+a.alignment.evil {
+  color: #f00;
+}
+a.alignment.neutral,
+a.alignment.Neutral {
+  color: #00f;
+}
+.superhero-avatar {
+  height: 250px;
+}
