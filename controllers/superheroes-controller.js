@@ -10,7 +10,7 @@ module.exports = function(data) {
             let pattern = req.query.pattern || "";
             let page = Number(req.query.page || DEFAULT_PAGE);
 
-            data.getSuperheroes({ pattern, page, pageSize: 3 })
+            data.getSuperheroes({ pattern, page, pageSize: PAGE_SIZE })
                 .then((superheroes => {
                     return res.render("superheroes-list", {
                         model: superheroes,

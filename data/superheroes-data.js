@@ -56,27 +56,31 @@ module.exports = function(models) {
             let query = {};
             if (typeof pattern === "string" && pattern.length >= MIN_PATTERN_LENGTH) {
                 query.$or = [{
-                    name: new RegExp(".*" + pattern + ".*", "gi")
+                    name: new RegExp(`.*${pattern}.*`, "gi")
                 }, {
-                    secretIdentity: new RegExp(".*" + pattern + ".*", "gi"),
+                    secretIdentity: new RegExp(`.*${pattern}.*`, "gi")
                 }, {
-                    story: new RegExp(".*" + pattern + ".*", "gi")
+                    story: new RegExp(`.*${pattern}.*`, "gi")
                 }];
             }
 
-            // let options = {
-            //     skip: (page - 1) * pageSize,
-            //     limit: page * pageSize
-            // };
+            let options = {
+                skip: (page - 1) * pageSize,
+                limit: page * pageSize
+            };
 
             return new Promise((resolve, reject) => {
-                Superhero.find(query, (err, superheroes) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                Superhero.find()
+                    .where(query)
+                    .skip(options.skip)
+                    .limit(options.limit)
+                    .exec((err, superheroes) => {
+                        if (err) {
+                            return reject(err);
+                        }
 
-                    return resolve(superheroes);
-                });
+                        return resolve(superheroes);
+                    });
             });
         },
         getSuperheroById(id) {
