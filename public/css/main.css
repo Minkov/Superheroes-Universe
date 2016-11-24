@@ -11,7 +11,23 @@ img {
   display: inline-block;
   position: relative;
 }
-.list .hero-info {
+.list.list-horizontal li {
+  display: inline-block;
+  margin-right: 15px;
+}
+.list.powers-list li {
+  display: inline-block;
+  margin-left: 20px;
+}
+.list.list-newest-superheroes img {
+  width: 150px;
+}
+.hero-info-container {
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.hero-info {
   width: 100%;
   padding: 15px 5px;
   position: absolute;

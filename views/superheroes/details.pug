@@ -1,12 +1,19 @@
 extends ../_layout
 
+include ../_mixins/_hero-info
+
 block content
-    h1
-        a(href= "/superheroes/" + model.id) 
-            = model.name + " (" + model.secretIdentity + ")"
-    img.superhero-avatar(src=model.imageUrl)
-    br
-    a(href= "/superheroes?alignment=" + model.alignment) 
-        =   model.alignment
+    .text-center
+        +hero-info(model)
+    ul.list.list-fractions
+        each fraction in model.fractions
+            li
+                a(href="/fractions/" + fraction.id)
+                    = fraction.name
+    ul.list.list-powers
+    each power in model.powers
+        li
+            a(href="/superheroes?powers=" + power.name)
+                = power.name
     p
-        =   model.story
+        = model.story

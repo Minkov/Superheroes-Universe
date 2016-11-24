@@ -1,50 +1,50 @@
-/* globals $ FormData*/
-
-function urlencodeFormData(fd) {
-    var s = "";
-
-    function encode(s) {
-        return encodeURIComponent(s).replace(/%20/g, "+");
-    }
-
-    for (var pair of fd.entries()) {
-        if (typeof pair[1] == "string") {
-            s += (s ?
-                    "&" :
-                    "") +
-                encode(pair[0]) + "=" + encode(pair[1]);
-        }
-    }
-    return s;
-}
-
+/* globals $ prompt*/
 
 $(function() {
-    $(".ajaxForm").submit(function(e) {
-        e.preventDefault();
-        var $this = $(this);
+    let $powersList = $(".powers-list");
 
-        var formData = new FormData($this[0]);
-        var url = $this.attr("action");
-        var method = $this.attr("method") || "GET";
+    $("#btn-add-new-power-option").on("click", function(ev) {
+        ev.preventDefault();
+        var powerName = prompt("Enter power name");
+        if (powerName === "") {
+            return false;
+        }
 
-        $.ajax({
-            url: url,
-            type: method,
-            data: urlencodeFormData(formData),
-            cache: false,
-            processData: false,
-            success: function(r, s, req) {
-                console.log("Success!");
-                console.log(req.getResponseHeader('Location'));
+        $("<li/>")
+            .append(
+                $("<label/>")
+                .append(powerName)
+                .append($("<input />")
+                    .addClass("form-control")
+                    .attr("name", "powers")
+                    .attr("type", "checkbox")
+                    .attr("checked", "true")
+                    .val(powerName)
+                ))
+            .appendTo($powersList);
+    });
 
-            },
-            error: function(err) {
-                console.log("Error!");
-                console.error(err);
-            }
+
+    $.getJSON("/superheroes/newest", function(resp) {
+        var $list = $("<ul/>")
+            .addClass("list-newest-superheroes")
+            .addClass("list");
+
+        resp.result.forEach(function(superhero) {
+            $("<li/>")
+                .addClass("text-center")
+                .append(
+                    $("<a/>")
+                    .attr("href", "/superheroes/" + superhero._id)
+                    .html(superhero.name)
+                )
+                .append("<br/>")
+                .append(
+                    $("<img/>")
+                    .attr("src", superhero.imageUrl)
+                )
+                .appendTo($list);
         });
-
-        return false;
+        $list.appendTo(".newest-superheroes-container");
     });
 });

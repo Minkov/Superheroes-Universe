@@ -1,14 +1,7 @@
 /* globals require console*/
 const config = require("./config");
 
-
-let envName = process.env["PRODUCTION"] ?
-    "prod" :
-    "dev";
-
-envName = "prod";
-
-let data = require("./data")(config.connectionString[envName]);
+let data = require("./data")(config.connectionString["dev"]);
 
 const app = require("./config/application")({ data });
 

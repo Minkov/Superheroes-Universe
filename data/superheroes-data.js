@@ -60,16 +60,57 @@ module.exports = function(models) {
                     });
 
                     return dataUtils.save(superhero);
+                })
+                .then(dbSuperhero => {
+                    superhero = dbSuperhero;
+                    let fractionsPromises = fractions.map(fraction => {
+                        let mapped = mapper.map(superhero, "_id", "name");
+                        fraction.superheroes.push(mapped);
+                        return dataUtils.update(fraction);
+                    });
+                    return Promise.all(fractionsPromises);
+                })
+                .then(() => {
+                    return superhero;
                 });
         },
         getSuperheroes({ page, pageSize }) {
             let skip = (page - 1) * pageSize,
                 limit = page * pageSize;
 
+            return Promise.all([
+                new Promise((resolve, reject) => {
+                    Superhero.find()
+                        .sort({ name: 1 })
+                        .skip(skip)
+                        .limit(limit)
+                        .exec((err, superheroes) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(superheroes);
+                        });
+                }), new Promise((resolve, reject) => {
+                    Superhero.count({})
+                        .exec((err, count) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(count);
+                        });
+                })
+            ]).then(results => {
+                let [superheroes, count] = results;
+                return { superheroes, count };
+            });
+        },
+        getNewestSuperheroes(count) {
             return new Promise((resolve, reject) => {
-                Superhero.find()
-                    .skip(skip)
-                    .limit(limit)
+                Superhero.find({})
+                    .sort({ createdAt: -1 })
+                    .limit(count)
                     .exec((err, superheroes) => {
                         if (err) {
                             return reject(err);
@@ -90,7 +131,6 @@ module.exports = function(models) {
                     story: new RegExp(`.*${pattern}.*`, "gi")
                 }];
             }
-
 
             let skip = (page - 1) * pageSize,
                 limit = page * pageSize;

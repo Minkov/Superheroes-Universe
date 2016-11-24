@@ -9,4 +9,4 @@ block content
         else
             a.btn.btn-danger(href="/superheroes/create" title="Sign in to add a new superhero" disabled)
                 | Add new superhero
-    +superheroes-list(model)
+    +superheroes-list(model, params.page, params.pages)

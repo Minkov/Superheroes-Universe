@@ -12,6 +12,7 @@ module.exports = function({ app, data }) {
     let router = new Router();
 
     router
+        .get("/newest", controller.getNewestSuperheroesAjax)
         .get("/", controller.getSuperheroes)
         .get("/create", controller.getCreateSuperheroForm)
         .get("/:id", controller.getSuperheroDetails)

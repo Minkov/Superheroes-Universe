@@ -7,16 +7,34 @@
     .list-item-container
         display inline-block
         position relative
+    
+    &.list-horizontal
+        li
+            display inline-block
+            margin-right 15px
 
-    .hero-info
-        width 100%
+    &.powers-list
+        li
+            display inline-block
+            margin-left 20px
+    &.list-newest-superheroes
+        img
+            width: 150px
 
-        padding 15px 5px
-        position absolute;
-        bottom 0
-        
-        background-color rgba(0, 0, 0, .4)
-        color white
+.hero-info-container
+    position relative
+    display inline-block
+    vertical-align bottom
+    
+.hero-info
+    width 100%
+
+    padding 15px 5px
+    position absolute;
+    bottom 0
+    
+    background-color rgba(0, 0, 0, .4)
+    color white
 
 a.alignment.Good
 a.alignment.good
