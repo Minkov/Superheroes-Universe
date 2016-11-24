@@ -32,5 +32,10 @@ a.alignment.Neutral {
   color: #00f;
 }
 .superhero-avatar {
-  height: 250px;
+  height: 550px;
+}
+.navbar-header,
+.collapse.navbar-collapse {
+  display: inline-block !important;
+  float: none;
 }

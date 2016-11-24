@@ -16,8 +16,9 @@ module.exports = function(config) {
     let Planet = require("../models/planet-model.js");
     let Power = require("../models/power-model.js");
     let Superhero = require("../models/superhero-model.js");
+    let User = require("../models/user-model.js");
 
-    let models = { City, Country, Fraction, Planet, Power, Superhero };
+    let models = { City, Country, Fraction, Planet, Power, Superhero, User };
 
     let data = {};
 

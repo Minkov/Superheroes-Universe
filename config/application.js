@@ -1,17 +1,21 @@
 /* globals module require */
 
 const express = require("express"),
-    bodyParser = require("body-parser");
+    bodyParser = require("body-parser"),
+    cookieParser = require("cookie-parser"),
+    session = require("express-session");
 
-let app = express();
+module.exports = function({ data }) {
+    let app = express();
 
-app.set("view engine", "pug");
+    app.set("view engine", "pug");
 
-app.use("/static", express.static("public"));
+    app.use("/static", express.static("public"));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-require("./passport")(app);
-
-module.exports = app;
+    app.use(cookieParser());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
+    app.use(session({ secret: "purple unicorn" }));
+    require("./passport")({ app, data });
+    return app;
+};

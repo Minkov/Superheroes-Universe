@@ -1,0 +1,10 @@
+extends _layout
+
+block content
+    .row
+        .col-xs-offset-1.col-xs-10.col-sm-offset-4.col-sm-4
+            form(action="/auth/sign-in" method="post")
+                input.form-control(type="text" name="username" placeholder="Enter Username")
+                input.form-control(type="text" name="password" placeholder="Enter Password")
+                button.btn.btn-danger.col-xs-12
+                    | Sign up

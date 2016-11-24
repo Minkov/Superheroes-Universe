@@ -1,6 +1,6 @@
 mixin site-navigation
     nav.navbar.navbar-default
-        .container-fluid
+        .container-fluid.text-center
             .navbar-header
                 button.navbar-toggle.collapsed(type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false")
                     span.sr-only Toggle navigation
@@ -24,5 +24,23 @@ mixin site-navigation
                                     a(href="#") 
                                         | View profile
                                 li
-                                    a(href="#")
-                                        | Sign out
+                                    form(action="auth/sign-out" method="post")
+                                        button
+                                            | Sign out
+                    else
+                        li.dropdown
+                            a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
+                                | User
+                                span.caret
+                            ul.dropdown-menu
+                                li
+                                    a(href="/auth/sign-up") 
+                                        | Sign up
+                                li
+                                    a(href="/auth/sign-in")
+                                        | Sign in
+                    li
+                        form.form-inline(action="/search" method="get")
+                            input.form-control(type="text" name="pattern")
+                            button.btn.btn-danger
+                                span.glyphicon.glyphicon-search

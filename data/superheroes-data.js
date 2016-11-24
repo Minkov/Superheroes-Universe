@@ -52,7 +52,24 @@ module.exports = function(models) {
                     return dataUtils.save(superhero);
                 });
         },
-        getSuperheroes({ pattern, page, pageSize }) {
+        getSuperheroes({ page, pageSize }) {
+            let skip = (page - 1) * pageSize,
+                limit = page * pageSize;
+
+            return new Promise((resolve, reject) => {
+                Superhero.find()
+                    .skip(skip)
+                    .limit(limit)
+                    .exec((err, superheroes) => {
+                        if (err) {
+                            return reject(err);
+                        }
+
+                        return resolve(superheroes);
+                    });
+            });
+        },
+        searchSuperheroes({ pattern, page, pageSize }) {
             let query = {};
             if (typeof pattern === "string" && pattern.length >= MIN_PATTERN_LENGTH) {
                 query.$or = [{
@@ -64,22 +81,21 @@ module.exports = function(models) {
                 }];
             }
 
-            let options = {
-                skip: (page - 1) * pageSize,
-                limit: page * pageSize
-            };
+
+            let skip = (page - 1) * pageSize,
+                limit = page * pageSize;
 
             return new Promise((resolve, reject) => {
                 Superhero.find()
                     .where(query)
-                    .skip(options.skip)
-                    .limit(options.limit)
+                    .skip(skip)
+                    .limit(limit)
                     .exec((err, superheroes) => {
                         if (err) {
                             return reject(err);
                         }
 
-                        return resolve(superheroes);
+                        return resolve(superheroes || []);
                     });
             });
         },

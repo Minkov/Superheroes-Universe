@@ -1,0 +1,19 @@
+mixin superheroes-list(superheroes)
+    ul.list.text-center
+        each superhero in superheroes
+            li
+                .list-item-container
+                    img.superhero-avatar(src=superhero.imageUrl)
+                    .hero-info
+                        strong
+                            =   superhero.name + " (" + superhero.secretIdentity + ")"
+                        br
+                        |Alignment: 
+                        a.alignment(href= "/superheroes?alignment=" + superhero.alignment class=superhero.alignment) 
+                            = superhero.alignment
+                        br
+                        a.btn.btn-danger(href= "/superheroes/" + superhero.id)
+                            | View more
+                        if user
+                            a.btn.btn-danger
+                                | Add to favorites

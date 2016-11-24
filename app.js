@@ -1,9 +1,9 @@
 /* globals require console*/
 const config = require("./config");
 
-const app = require("./config/application");
-
 let data = require("./data")(config);
+
+const app = require("./config/application")({ data });
 
 require("./routers")({ app, data });
 

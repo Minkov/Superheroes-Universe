@@ -1,22 +1,5 @@
 extends _layout
+include mixins/_superheroes-list
 
 block content
-    .text-center
-        form.form-inline(action="/superheroes" method="GET")
-            input.form-control(type="text" name="pattern" value=params.pattern)
-            button.btn.btn-danger Search
-    ul.list.text-center
-        each superhero in model
-            li
-                .list-item-container
-                    img.superhero-avatar(src=superhero.imageUrl)
-                    .hero-info
-                        strong
-                            =   superhero.name + " (" + superhero.secretIdentity + ")"
-                        br
-                        |Alignment: 
-                        a.alignment(href= "/superheroes?alignment=" + superhero.alignment class=superhero.alignment) 
-                            = superhero.alignment
-                        br
-                        a.btn.btn-danger(href= "/superheroes/" + superhero.id)
-                            | View more
+    +superheroes-list(model)
