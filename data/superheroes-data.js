@@ -7,6 +7,7 @@ const MIN_PATTERN_LENGTH = 3;
 
 module.exports = function(models) {
     let {
+        Fraction,
         Superhero,
         City,
         Country,
@@ -15,14 +16,15 @@ module.exports = function(models) {
     } = models;
 
     return {
-        createSuperhero(name, secretIdentity, alignment, story, imageUrl, cityName, countryName, planetName, ...powerNames) {
+        createSuperhero(name, secretIdentity, powersNames, cityName, countryName, planetName, story, alignment, imageUrl, fractionsNames) {
             let planet,
                 country,
                 city,
                 superhero,
-                powers;
+                powers,
+                fractions;
 
-            dataUtils.loadOrCreatePlanet(Planet, planetName)
+            return dataUtils.loadOrCreatePlanet(Planet, planetName)
                 .then(dbPlanet => {
                     planet = dbPlanet;
                     return dataUtils.loadOrCreateCountry(Country, countryName, planet);
@@ -33,22 +35,30 @@ module.exports = function(models) {
                 })
                 .then(dbCity => {
                     city = dbCity;
-                    let powersPromises = powerNames.map(powerName => dataUtils.loadOrCreatePower(Power, powerName));
+                    let powersPromises = powersNames.map(powerName => dataUtils.loadOrCreatePower(Power, powerName));
                     return Promise.all(powersPromises);
                 })
                 .then(dbPowers => {
                     powers = dbPowers;
+                    let fractionsPromises = fractionsNames.map(fractionName => dataUtils.loadOrCreateFraction(Fraction, fractionName, planet, alignment));
+                    return Promise.all(fractionsPromises);
+                })
+                .then(dbFractions => {
+                    fractions = dbFractions;
+
                     superhero = new Superhero({
                         name,
                         secretIdentity,
                         story,
                         alignment,
+                        imageUrl,
                         city: mapper.map(city, "_id", "name"),
                         country: mapper.map(country, "_id", "name"),
                         planet: mapper.map(planet, "_id", "name"),
                         powers: powers.map(power => mapper.map(power, "_id", "name")),
-                        fractions: []
+                        fractions: fractions.map(fraction => mapper.map(fraction, "_id", "name"))
                     });
+
                     return dataUtils.save(superhero);
                 });
         },

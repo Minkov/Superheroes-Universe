@@ -11,7 +11,7 @@ module.exports = function(data) {
 
             return Promise.all([data.searchSuperheroes(({ pattern, page, pageSize: PAGE_SIZE })), data.searchFractions({ pattern, page, pageSize: PAGE_SIZE })])
                 .then(([superheroes, fractions]) => {
-                    return res.render("search", {
+                    return res.render("search/search", {
                         model: {
                             superheroes,
                             fractions

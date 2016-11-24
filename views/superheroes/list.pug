@@ -1,0 +1,12 @@
+extends ../_layout
+include ../_mixins/_superheroes-list
+
+block content
+    .text-center
+        if user
+            a.btn.btn-danger(href="/superheroes/create")
+                | Add new superhero
+        else
+            a.btn.btn-danger(href="/superheroes/create" title="Sign in to add a new superhero" disabled)
+                | Add new superhero
+    +superheroes-list(model)

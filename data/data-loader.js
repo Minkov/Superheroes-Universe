@@ -7,8 +7,8 @@ const fs = require("fs"),
 
 // mongoose.Promise = global.Promise;
 
-module.exports = function(config) {
-    mongoose.connect(config.connectionString);
+module.exports = function(connectionString) {
+    mongoose.connect(connectionString);
 
     let City = require("../models/city-model.js");
     let Country = require("../models/country-model.js");

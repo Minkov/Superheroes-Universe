@@ -1,0 +1,44 @@
+extends ../_layout
+
+block content
+    form.ajaxForm(action="/superheroes" method="post")
+        input.form-control(type="text" name="name" placeholder="Enter Name")
+        input.form-control(type="text" name="secretIdentity" placeholder="Enter Secret Identity")
+        label
+            | Random 1
+            input.form-control(type="checkbox" name="powers" placeholder="Enter Powers" value="Random 1")
+        label
+            | Random 2
+            input.form-control(type="checkbox" name="powers" placeholder="Enter Powers" value="Random 2")
+        label
+            | Random 3
+            input.form-control(type="checkbox" name="powers" placeholder="Enter Powers" value="Random 3")
+        input.form-control(type="text" name="city" placeholder="Enter City")
+        input.form-control(type="text" name="country" placeholder="Enter Country")
+        input.form-control(type="text" name="planet" placeholder="Enter Planet")
+        textarea.form-control(name="story" placeholder="Enter story")
+        
+        label
+            | Good
+            input.form-control(type="radio" name="alignment" placeholder="Enter Powers" value="Good")
+        label
+            | Evil
+            input.form-control(type="radio" name="alignment" placeholder="Enter Powers" value="Evil")
+        label
+            | Neutral
+            input.form-control(type="radio" name="alignment" placeholder="Enter Powers" value="Neutral")
+        
+        input.form-control(type="text" name="imageUrl" placeholder="Enter imageUrl")
+        
+        label
+            | Avengers
+            input.form-control(type="checkbox" name="fractions" value="Avengers")
+        label
+            | Justice League
+            input.form-control(type="checkbox" name="fractions" value="Justice League")
+        label
+            | Bat Family
+            input.form-control(type="checkbox" name="fractions" value="Bat Family")
+
+        button.btn.btn-danger
+            | Submit

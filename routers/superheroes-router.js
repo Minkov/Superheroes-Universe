@@ -13,6 +13,7 @@ module.exports = function({ app, data }) {
 
     router
         .get("/", controller.getSuperheroes)
+        .get("/create", controller.getCreateSuperheroForm)
         .get("/:id", controller.getSuperheroDetails)
         .post("/", controller.createSuperhero)
         .post("/update", controller.updateSuperhero);

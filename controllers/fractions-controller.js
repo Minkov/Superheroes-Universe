@@ -5,7 +5,7 @@ module.exports = function(data) {
         getFractions(req, res) {
             data.getFractions()
                 .then(fractions => {
-                    res.render("fractions-list", {
+                    res.render("fractions/list", {
                         model: fractions,
                         user: req.user
                     });
@@ -15,7 +15,6 @@ module.exports = function(data) {
 
         },
         createFraction(req, res) {
-
 
         }
     };

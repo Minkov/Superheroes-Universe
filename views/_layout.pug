@@ -1,4 +1,4 @@
-include mixins/_navigation
+include _mixins/_navigation
 
 <!DOCTYPE html>
 html(lang="en")
@@ -12,23 +12,11 @@ head
 
     script(src="/static/bower_components/jquery/dist/jquery.js")
     script(src="/static/bower_components/bootstrap/dist/js/bootstrap.js")
-
+    script(src="/static/js/main.js")
     block headScripts
 body
     header
         +site-navigation
-
-        //- nav
-        //-     ul
-        //-         li
-        //-             a(href="/") Home
-        //-         li
-        //-             a(href="/superheroes") Superheroes
-        //-         li
-        //-             a(href="/fractions") Fractions
-        //-         if result.Fser
-        //-             li
-        //-                 a(href="/profile") Profile
     #content.container
         block content
     footer.text-center

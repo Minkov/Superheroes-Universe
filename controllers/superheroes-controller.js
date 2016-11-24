@@ -12,7 +12,7 @@ module.exports = function(data) {
 
             data.getSuperheroes({ pattern, page, pageSize: PAGE_SIZE })
                 .then((superheroes => {
-                    return res.render("superheroes-list", {
+                    return res.render("superheroes/list", {
                         model: superheroes,
                         user,
                         params: { pattern, page }
@@ -27,15 +27,60 @@ module.exports = function(data) {
             let id = req.params.id;
             data.getSuperheroById(id)
                 .then(superhero => {
-                    let user = { username: "Doncho" };
-                    return res.render("superhero-details", {
+                    return res.render("superheroes/details", {
                         model: superhero,
-                        user
+                        user: req.user
                     });
                 });
         },
-        createSuperhero(req, res) {
+        getCreateSuperheroForm(req, res) {
+            // if (!req.isAuthenticated()) {
+            //     return res.redirect("/");
+            // }
 
+            return res.render("superheroes/create", {
+                user: req.user
+            });
+        },
+        createSuperhero(req, res) {
+            // if (!req.isAuthenticated()) {
+            //     return res.redirect("/");
+            // }
+
+            let {
+                name,
+                secretIdentity,
+                powers,
+                city,
+                country,
+                planet,
+                story,
+                alignment,
+                imageUrl,
+                fractions
+            } = req.body;
+            if (!Array.isArray(fractions)) {
+                fractions = [fractions];
+            }
+
+            return data.createSuperhero(
+                    name,
+                    secretIdentity,
+                    powers,
+                    city,
+                    country,
+                    planet,
+                    story,
+                    alignment,
+                    imageUrl,
+                    fractions)
+                .then(superhero => {
+                    return res.redirect(`/superheroes/${superhero.id}`);
+                })
+                .catch(err => {
+                    res.status(400)
+                        .send(err);
+                });
         },
         updateSuperhero(req, res) {
 

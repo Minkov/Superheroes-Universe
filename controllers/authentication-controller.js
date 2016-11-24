@@ -14,10 +14,10 @@ module.exports = function(data) {
             res.redirect("/");
         },
         getSignUpForm(req, res) {
-            return res.render("sign-up");
+            return res.render("authentication/sign-up");
         },
         getSignInForm(req, res) {
-            return res.render("sign-in");
+            return res.render("authentication/sign-in");
         }
     };
 };
