@@ -6,7 +6,10 @@ module.exports = modelRegistrator.register("Fraction", {
     name: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        validate: () => {
+
+        }
     },
     alignment: {
         type: String,

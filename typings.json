@@ -12,5 +12,10 @@
     "passport-local": "registry:dt/passport-local#0.0.0+20160316155526",
     "pug": "registry:dt/pug#2.0.0-beta6+20160919072324",
     "serve-static": "registry:dt/serve-static#0.0.0+20160606155157"
+  },
+  "globalDevDependencies": {
+    "chai": "registry:dt/chai#3.4.0+20160601211834",
+    "mocha": "registry:dt/mocha#2.2.5+20161028141524",
+    "sinon": "registry:dt/sinon#1.16.0+20160924120326"
   }
 }

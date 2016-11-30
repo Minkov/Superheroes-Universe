@@ -1,31 +1,34 @@
 {
-  "name": "superheroes-universe",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "development": "./node_modules/.bin/nodemon .",
-    "test": "./node_modules/.bin/eslint .",
-    "postinstall": "./node_modules/.bin/bower install"
-  },
-  "author": "Doncho Minkov (DonchoMinkov@gmail.com)",
-  "license": "MIT",
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "bower": "^1.8.0",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.14.0",
-    "express-session": "^1.14.2",
-    "mongoose": "^4.6.8",
-    "morgan": "^1.7.0",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
-    "pug": "^2.0.0-beta6",
-    "stylus": "^0.54.5"
-  },
-  "devDependencies": {
-    "eslint": "^3.10.2",
-    "nodemon": "^1.11.0"
-  }
+    "name": "superheroes-universe",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "development": "./node_modules/.bin/nodemon .",
+        "test": "./node_modules/.bin/mocha tests",
+        "postinstall": "./node_modules/.bin/bower install"
+    },
+    "author": "Doncho Minkov (DonchoMinkov@gmail.com)",
+    "license": "MIT",
+    "dependencies": {
+        "body-parser": "^1.15.2",
+        "bower": "^1.8.0",
+        "cookie-parser": "^1.4.3",
+        "express": "^4.14.0",
+        "express-session": "^1.14.2",
+        "mongoose": "^4.6.8",
+        "morgan": "^1.7.0",
+        "passport": "^0.3.2",
+        "passport-local": "^1.0.0",
+        "pug": "^2.0.0-beta6",
+        "stylus": "^0.54.5"
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "eslint": "^3.10.2",
+        "mocha": "^3.2.0",
+        "nodemon": "^1.11.0",
+        "sinon": "^1.17.6"
+    }
 }

@@ -54,6 +54,28 @@ module.exports = function(models) {
                         return reject(err);
                     }
 
+                    return resolve(fraction || null);
+                });
+            });
+        },
+        createFraction(name, alignment, cities, planets) {
+            if (name.length < 3 || name.length > 40) {
+                return Promise.reject({ reason: "Name must be between 3 and 40 characters long" });
+            }
+
+            let fraction = new Fraction({
+                name,
+                alignment,
+                planets,
+                cities
+            });
+
+            return new Promise((resolve, reject) => {
+                fraction.save(err => {
+                    if (err) {
+                        return reject(err);
+                    }
+
                     return resolve(fraction);
                 });
             });
