@@ -7,7 +7,7 @@ const DEFAULT_PAGE = 1,
     NEWEST_SUPERHEROES_COUNT = 5;
 
 module.exports = function({ data }) {
-    const controller = {
+    return {
         name: "superheroes",
         getNewestSuperheroesAjax(req, res) {
             data.getNewestSuperheroes(NEWEST_SUPERHEROES_COUNT)
@@ -87,10 +87,6 @@ module.exports = function({ data }) {
                 });
         },
         createSuperhero(req, res) {
-            // if (!req.isAuthenticated()) {
-            //     return res.redirect("/");
-            // }
-
             let {
                 name,
                 secretIdentity,
@@ -135,5 +131,4 @@ module.exports = function({ data }) {
 
         }
     };
-    return controller;
 };

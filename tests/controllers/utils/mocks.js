@@ -1,7 +1,13 @@
 /* globals module */
 
 let createRequest = () => {
-    return {};
+    return {
+        query: {},
+        addQuery(name, value) {
+            this.query[name] = value;
+            return this;
+        }
+    };
 };
 
 let createResponse = () => {
@@ -16,7 +22,7 @@ let createResponse = () => {
             this.params.model = model;
             this.params.url = url;
 
-            this.fireEvents("end");
+            this._fireEvents("end");
 
             return this;
         },
@@ -26,17 +32,20 @@ let createResponse = () => {
         },
         send(model) {
             this.params.model = model;
+            return this;
         },
         status(newStatus) {
             this.params.status = newStatus;
+            return this;
         },
 
         on(eventName, cb) {
             this.events[eventName] = this.events[eventName] || [];
             this.events[eventName].push(cb);
+            return this;
         },
 
-        fireEvents(...eventNames) {
+        _fireEvents(...eventNames) {
             eventNames
                 .forEach(eventName => {
                     if (typeof this.events[eventName] !== "undefined") {

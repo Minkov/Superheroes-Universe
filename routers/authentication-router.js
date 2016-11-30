@@ -6,7 +6,7 @@ const passport = require("passport");
 let Router = express.Router;
 
 module.exports = function({ app, controllers }) {
-    let controller = controllers.auth;
+    let controller = controllers.authentication;
     let router = new Router();
 
     router

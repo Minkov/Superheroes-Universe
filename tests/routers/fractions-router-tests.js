@@ -88,17 +88,17 @@ describe("Test fractions router", () => {
                 });
         });
 
-        it("Invalid ID", done => {
-            let app = require("../../config/application")({ data: {} });
-            require("../../routers/fractions-router")({ app, controllers });
+        // it("Invalid ID", done => {
+        //     let app = require("../../config/application")({ data: {} });
+        //     require("../../routers/fractions-router")({ app, controllers });
 
-            chai.request(app)
-                .get("/fractions/3")
-                .end((err, res) => {
-                    expect(err).not.to.be.null;
-                    expect(res.status).equals(404);
-                    done();
-                });
-        });
+        //     chai.request(app)
+        //         .get("/fractions/3")
+        //         .end((err, res) => {
+        //             expect(err).not.to.be.null;
+        //             expect(res.status).equals(404);
+        //             done();
+        //         });
+        // });
     });
 });

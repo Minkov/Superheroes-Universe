@@ -3,7 +3,7 @@
 const chai = require("chai");
 const sinonModule = require("sinon");
 
-const mocks = require("./utils/request-response-mocks");
+const mocks = require("./utils/mocks");
 
 let expect = chai.expect;
 
@@ -11,11 +11,25 @@ describe("Test fractions controller", () => {
     let sinon;
     let data = {
         getFractions: () => {},
-        getFractionById: id => {}
+        getFractionById: id => {},
     };
+
+    const fractions = [{
+        _id: 1,
+        name: "Avengers"
+    }];
 
     beforeEach(() => {
         sinon = sinonModule.sandbox.create();
+
+        sinon.stub(data, "getFractions", () => {
+            return Promise.resolve(fractions);
+        });
+
+        sinon.stub(data, "getFractionById", id => {
+            let fraction = fractions.find(fr => fr._id === Number(id));
+            return Promise.resolve(fraction || null);
+        });
     });
 
     afterEach(() => {
@@ -23,17 +37,7 @@ describe("Test fractions controller", () => {
     });
 
     it("getFractions", done => {
-        let controller = require("../../controllers/fractions-controller")(data);
-
-        const fractions = [{
-            _id: 1,
-            name: "Avengers"
-        }];
-
-        sinon.stub(data, "getFractions", () => {
-            return Promise.resolve(fractions);
-        });
-
+        let controller = require("../../controllers/fractions-controller")({ data });
         let req = mocks.createRequest();
 
         let res = mocks.createResponse();
