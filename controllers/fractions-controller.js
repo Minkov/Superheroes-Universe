@@ -12,7 +12,18 @@ module.exports = function(data) {
                 });
         },
         getFractionDetails(req, res) {
+            return data.getFractionById(req.params.id)
+                .then(fraction => {
+                    if (fraction === null) {
+                        return res.status(404)
+                            .redirect("/fractions");
+                    }
 
+                    return res.render("fractions/details", {
+                        model: fraction,
+                        user: req.user
+                    });
+                });
         },
         createFraction(req, res) {
 

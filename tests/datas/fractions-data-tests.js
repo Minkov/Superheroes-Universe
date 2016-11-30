@@ -27,11 +27,9 @@ describe("Test fractions data", () => {
         static findOne() {}
     }
 
-    let data = require("../data/fractions-data")({ Fraction });
+    let data = require("../../data/fractions-data")({ Fraction });
 
     describe("getFractions()", () => {
-        let data = require("../data/fractions-data")({ Fraction });
-
         it("Expect to return 2 fractions", done => {
             // arrange
             let fractions = ["Avengers", "Fantastic Four"];
