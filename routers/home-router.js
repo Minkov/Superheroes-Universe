@@ -3,8 +3,8 @@
 const express = require("express");
 let Router = express.Router;
 
-module.exports = function({ app, data }) {
-    let controller = require("../controllers/home-controller")(data);
+module.exports = function({ app, controllers }) {
+    let controller = controllers.home;
 
     let router = new Router();
 

@@ -1,4 +1,4 @@
-/* globals require describe it beforeEach afterEach*/
+/* globals require describe it beforeEach afterEach before after*/
 
 const chai = require("chai");
 const sinonModule = require("sinon");
@@ -10,9 +10,15 @@ let expect = chai.expect;
 
 describe("Test fractions router", () => {
     let sinon;
-    let data = {
-        getFractions: () => {},
-        getFractionById: id => {}
+
+    let controller = {
+        getFractions: (req, res) => {},
+        getFractionDetails: (req, res) => {},
+        createFraction: (req, res) => {}
+    };
+
+    let controllers = {
+        fractions: controller
     };
 
     let fractions = [{
@@ -31,6 +37,24 @@ describe("Test fractions router", () => {
 
     beforeEach(() => {
         sinon = sinonModule.sandbox.create();
+
+        sinon.stub(controller, "getFractions", (req, res) => {
+            res.render("fractions/list", {
+                model: fractions
+            });
+        });
+        sinon.stub(controller, "getFractionDetails", (req, res) => {
+            let fraction = fractions.find(fr => fr._id === +req.params.id);
+
+            res.render("fractions/details", {
+                model: fraction || null
+            });
+        });
+        sinon.stub(controller, "createFraction", (req, res) => {
+            res.render("fractions/list", {
+                model: fractions
+            });
+        });
     });
 
     afterEach(() => {
@@ -39,12 +63,8 @@ describe("Test fractions router", () => {
 
     describe("GET /fractions", () => {
         it("expect to return 2 fractions", done => {
-            sinon.stub(data, "getFractions", () => {
-                return Promise.resolve(fractions);
-            });
-
-            let app = require("../../config/application")({ data });
-            require("../../routers")({ data, app });
+            let app = require("../../config/application")({ data: {} });
+            require("../../routers/fractions-router")({ app, controllers });
 
             chai.request(app)
                 .get("/fractions")
@@ -56,16 +76,9 @@ describe("Test fractions router", () => {
     });
 
     describe("GET /fractions/:id", () => {
-        beforeEach(() => {
-            sinon.stub(data, "getFractionById", id => {
-                let fraction = fractions.find(fr => fr._id === id);
-                return Promise.resolve(fraction || null);
-            });
-        });
-
-        it("GET fractions/:id", done => {
-            let app = require("../../config/application")({ data });
-            require("../../routers")({ data, app });
+        it("Valid ID", done => {
+            let app = require("../../config/application")({ data: {} });
+            require("../../routers/fractions-router")({ app, controllers });
 
             chai.request(app)
                 .get("/fractions/1")
@@ -75,18 +88,15 @@ describe("Test fractions router", () => {
                 });
         });
 
-        it("GET fractions/:id, id is invalid", done => {
-            let app = require("../../config/application")({ data });
-            require("../../routers")({ data, app });
+        it("Invalid ID", done => {
+            let app = require("../../config/application")({ data: {} });
+            require("../../routers/fractions-router")({ app, controllers });
 
             chai.request(app)
                 .get("/fractions/3")
-                .end((req, res) => {
+                .end((err, res) => {
+                    expect(err).not.to.be.null;
                     expect(res.status).equals(404);
-                    done();
-                })
-                .catch(err => {
-                    console.log(err);
                     done();
                 });
         });

@@ -1,9 +1,10 @@
 /* globals module */
 
-module.exports = function(data) {
+module.exports = function({ data }) {
     return {
+        name: "fractions",
         getFractions(req, res) {
-            data.getFractions()
+            return data.getFractions()
                 .then(fractions => {
                     res.render("fractions/list", {
                         model: fractions,
@@ -14,9 +15,13 @@ module.exports = function(data) {
         getFractionDetails(req, res) {
             return data.getFractionById(req.params.id)
                 .then(fraction => {
-                    if (fraction === null) {
+                    if (!fraction) {
+                        // return res.redirect("/fractions");
                         return res.status(404)
-                            .redirect("/fractions");
+                            .render("fractions/details", {
+                                model: null,
+                                user: req.user
+                            });
                     }
 
                     return res.render("fractions/details", {

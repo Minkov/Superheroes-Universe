@@ -3,8 +3,7 @@
     // Use hover for the description of the existing attributes
     // For further information visit https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [
-        {
+    "configurations": [{
             "name": "Launch Program",
             "type": "node2",
             "request": "launch",
@@ -16,6 +15,16 @@
             "type": "node2",
             "request": "attach",
             "port": 9229
+        },
+        {
+            "name": "Run Mocha",
+            "type": "node",
+            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+            "stopOnEntry": false,
+            "args": ["tests/*.js", "tests/**/*.js"],
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": null,
+            "env": {}
         }
     ]
 }

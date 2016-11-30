@@ -3,11 +3,8 @@
 const express = require("express");
 let Router = express.Router;
 
-
-
-module.exports = function({ app, data }) {
-
-    let controller = require("../controllers/superheroes-controller")(data);
+module.exports = function({ app, controllers }) {
+    let controller = controllers.superheroes;
 
     let router = new Router();
 

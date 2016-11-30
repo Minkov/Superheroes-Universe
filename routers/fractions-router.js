@@ -3,9 +3,8 @@
 const express = require("express");
 let Router = express.Router;
 
-module.exports = function({ app, data }) {
-
-    let controller = require("../controllers/fractions-controller")(data);
+module.exports = function({ app, controllers }) {
+    let controller = controllers.fractions;
 
     let router = new Router();
 

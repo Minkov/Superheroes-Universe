@@ -6,8 +6,9 @@ const DEFAULT_PAGE = 1,
     PAGE_SIZE = 10,
     NEWEST_SUPERHEROES_COUNT = 5;
 
-module.exports = function(data) {
+module.exports = function({ data }) {
     const controller = {
+        name: "superheroes",
         getNewestSuperheroesAjax(req, res) {
             data.getNewestSuperheroes(NEWEST_SUPERHEROES_COUNT)
                 .then(superheroes => {

@@ -1,7 +1,8 @@
 /* globals module */
 
-module.exports = function(data) {
+module.exports = function({ data }) {
     return {
+        name: "authentication",
         signUp(req, res) {
             let { username, password } = req.body;
             data.createUser(username, password)

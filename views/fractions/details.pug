@@ -3,5 +3,8 @@ extends ../_layout
 block content
 
     h1
-        a(href="/fractions/" + model.id)
-            = model.name
+        if model
+            a(href="/fractions/" + model.id)
+                = model.name
+        else
+            | Not found :(

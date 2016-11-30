@@ -3,8 +3,9 @@
 const DEFAULT_PAGE = 1,
     PAGE_SIZE = 10;
 
-module.exports = function(data) {
+module.exports = function({ data }) {
     return {
+        name: "search",
         search(req, res) {
             let pattern = req.query.pattern || "";
             let page = Number(req.query.page || DEFAULT_PAGE);
