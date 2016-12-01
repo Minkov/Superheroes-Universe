@@ -55,3 +55,8 @@ a.alignment.Neutral {
   display: inline-block !important;
   float: none;
 }
+.btn-sign-out {
+  border: none;
+  background: none;
+  color: #000;
+}

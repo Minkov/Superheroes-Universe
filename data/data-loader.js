@@ -9,6 +9,7 @@ const fs = require("fs"),
 
 module.exports = function(connectionString) {
     mongoose.connect(connectionString);
+    mongoose.Promise = global.Promise;
 
     let City = require("../models/city-model.js");
     let Country = require("../models/country-model.js");
