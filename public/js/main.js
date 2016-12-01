@@ -1,7 +1,7 @@
 /* globals $ prompt*/
 
 $(function() {
-    let $powersList = $(".powers-list");
+    var $powersList = $(".powers-list");
 
     $("#btn-add-new-power-option").on("click", function(ev) {
         ev.preventDefault();

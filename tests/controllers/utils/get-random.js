@@ -1,5 +1,7 @@
 const symbols = "qwertyuiopasdfghjklzxcvbnm.!?\"';1234567890QWERTYUIOPASDFGHJKLZXCVBNM";
 
+const defaultNumberFrom = 0;
+
 const getRandom = {
     number: {
         between(from) {
@@ -10,11 +12,11 @@ const getRandom = {
             };
         },
         lesserThan(to) {
-            return this.between(0)
+            return this.between(defaultNumberFrom)
                 .and(to);
         },
         lesserThanOrEqualTo(to) {
-            return this.between(0)
+            return this.between(defaultNumberFrom)
                 .and(to + 1);
         }
     },
@@ -89,5 +91,3 @@ const getRandom = {
         }
     }
 };
-
-module.exports = getRandom;
