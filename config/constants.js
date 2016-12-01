@@ -7,6 +7,6 @@ let connectionStrings = {
 
 module.exports = {
     environment: process.env.NODE_ENV || "development",
-    connectionString: {},
+    connectionString: connectionStrings[process.env.NODE_ENV || "development"],
     port: process.env.PORT || 3001
 };
