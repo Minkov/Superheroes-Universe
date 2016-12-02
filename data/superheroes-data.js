@@ -16,7 +16,7 @@ module.exports = function(models) {
     } = models;
 
     return {
-        createSuperhero(name, secretIdentity, powersNames, cityName, countryName, planetName, story, alignment, imageUrl, fractionsNames) {
+        createSuperhero(name, secretIdentity, powersNames, cityName, countryName, planetName, story, alignment, imageUrl, fractionsNames, user) {
             let planet,
                 country,
                 city,
@@ -56,7 +56,8 @@ module.exports = function(models) {
                         country: mapper.map(country, "_id", "name"),
                         planet: mapper.map(planet, "_id", "name"),
                         powers: powers.map(power => mapper.map(power, "_id", "name")),
-                        fractions: fractions.map(fraction => mapper.map(fraction, "_id", "name"))
+                        fractions: fractions.map(fraction => mapper.map(fraction, "_id", "name")),
+                        user: mapper.map(user, "_id", "username")
                     });
 
                     return dataUtils.save(superhero);

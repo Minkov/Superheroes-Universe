@@ -6,7 +6,7 @@ const DEFAULT_PAGE = 1,
     PAGE_SIZE = 10,
     NEWEST_SUPERHEROES_COUNT = 5;
 
-module.exports = function({ data }) {
+module.exports = function({ data, io }) {
     return {
         name: "superheroes",
         getNewestSuperheroesAjax(req, res) {
@@ -21,6 +21,11 @@ module.exports = function({ data }) {
             let user = req.user;
             let pattern = req.query.pattern || "";
             let page = Number(req.query.page || DEFAULT_PAGE);
+
+            if (req.user) {
+                console.log(req.user);
+                console.log(io.sockets.connected);
+            }
 
             data.getSuperheroes({ pattern, page, pageSize: PAGE_SIZE })
                 .then((result => {
@@ -87,18 +92,7 @@ module.exports = function({ data }) {
                 });
         },
         createSuperhero(req, res) {
-            let {
-                name,
-                secretIdentity,
-                powers,
-                city,
-                country,
-                planet,
-                story,
-                alignment,
-                imageUrl,
-                fractions
-            } = req.body;
+            let { name, secretIdentity, powers, city, country, planet, story, alignment, imageUrl, fractions } = req.body;
 
             if (!Array.isArray(fractions)) {
                 fractions = [fractions];
@@ -118,7 +112,8 @@ module.exports = function({ data }) {
                     story,
                     alignment,
                     imageUrl,
-                    fractions)
+                    fractions,
+                    req.user)
                 .then(superhero => {
                     return res.redirect(`/superheroes/${superhero.id}`);
                 })
