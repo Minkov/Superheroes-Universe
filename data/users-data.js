@@ -31,17 +31,6 @@ module.exports = function(models) {
                 console.log(ex);
             }
 
-            var fs = require("fs");
-            var imagemin = require("image-min");
-            var path = require("path");
-
-            var src = fs.createReadStream(path.join(__dirname, "../", imagePath));
-            var ext = "jpg";
-
-            src
-                .pipe(imagemin({ ext }))
-                .pipe(fs.createWriteStream(`img-minified.${ext}`));
-
             user.imagePath = imagePath;
             return dataUtils.save(user);
         },
