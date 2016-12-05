@@ -3,11 +3,13 @@ mixin site-navigation(user)
         .container-fluid.text-center
             .navbar-header
                 button.navbar-toggle.collapsed(type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false")
-                    span.sr-only Toggle navigation
+                    span.sr-only 
+                        | Toggle navigation
                     span.icon-bar
                     span.icon-bar
                     span.icon-bar
-                a.btn-sign-outnavbar-brand(href="/") The Superheroes Universe
+                a.btn-sign-outnavbar-brand(href="/") 
+                    | The Superheroes Universe
             #navbar-collapse.collapse.navbar-collapse
                 ul.nav.navbar-nav
                     li
