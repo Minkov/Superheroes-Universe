@@ -62,3 +62,6 @@ a.alignment.Neutral {
   background: none;
   color: #000;
 }
+.profile-image {
+  width: 100%;
+}

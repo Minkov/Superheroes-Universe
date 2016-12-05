@@ -46,6 +46,20 @@ $(function() {
             .appendTo($powersList);
     });
 
+    $("#img-input").on("change", function(ev) {
+        var $this = $(this);
+
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                console.log(e.target.result);
+                $('#uploaded-img').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
 
     $.getJSON("/superheroes/newest", function(resp) {
         var $list = $("<ul/>")

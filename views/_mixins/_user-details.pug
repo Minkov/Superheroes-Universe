@@ -1,0 +1,8 @@
+mixin user-details(user)
+    .row.text-center
+            .col-xs-12
+                h2
+                    =   user.username
+    .row
+        .col-xs-offset-1.col-xs-10.col-sm-offset-3.col-sm-6
+            img.profile-image(src="/" + user.imagePath)

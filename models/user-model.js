@@ -15,5 +15,8 @@ module.exports = modelRegistrator.register("User", {
     superheroes: {
         type: [{}],
         default: []
+    },
+    imagePath: {
+        type: String
     }
 });

@@ -1,0 +1,8 @@
+extends ../_layout
+
+block content
+    form(action="/users/edit" method="post" enctype="multipart/form-data")
+        input#img-input(type="file" name="profile-image")
+        img#uploaded-img(src="#")
+        button
+            | Update

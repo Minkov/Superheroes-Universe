@@ -1,4 +1,6 @@
 extends ../_layout
+include ../_mixins/_user-details
 
 block content
-    = "I am " + model.username
+    +user-details(model)
+    
