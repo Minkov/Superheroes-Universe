@@ -11,7 +11,12 @@
     &.list-horizontal
         li
             display inline-block
-            margin-right 15px
+            margin 0
+            padding 0 15px
+            border-left 2px solid black
+
+            &:first-of-type
+                border-left 0
 
     &.powers-list
         li
@@ -47,7 +52,6 @@ a.alignment.evil
 a.alignment.neutral
 a.alignment.Neutral
     color: blue
-
 
 .superhero-avatar
     height 550px

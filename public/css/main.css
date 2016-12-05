@@ -10,7 +10,12 @@
 }
 .list.list-horizontal li {
   display: inline-block;
-  margin-right: 15px;
+  margin: 0;
+  padding: 0 15px;
+  border-left: 2px solid #000;
+}
+.list.list-horizontal li:first-of-type {
+  border-left: 0;
 }
 .list.powers-list li {
   display: inline-block;

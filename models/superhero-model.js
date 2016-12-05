@@ -27,5 +27,6 @@ module.exports = modelRegistrator.register("Superhero", {
     powers: [{}],
     city: {},
     country: {},
-    planet: {}
+    planet: {},
+    user: {}
 });

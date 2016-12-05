@@ -22,11 +22,6 @@ module.exports = function({ data, io }) {
             let pattern = req.query.pattern || "";
             let page = Number(req.query.page || DEFAULT_PAGE);
 
-            if (req.user) {
-                console.log(req.user);
-                console.log(io.sockets.connected);
-            }
-
             data.getSuperheroes({ pattern, page, pageSize: PAGE_SIZE })
                 .then((result => {
                     let {
@@ -71,6 +66,11 @@ module.exports = function({ data, io }) {
             let id = req.params.id;
             data.getSuperheroById(id)
                 .then(superhero => {
+                    superhero.isInFavorites = false;
+                    if (req.user) {
+                        let superheroInFavorites = req.user.superheroes.find(sh => sh.name === superhero.name);
+                        superhero.isInFavorites = typeof superheroInFavorites !== "undefined";
+                    }
                     return res.render("superheroes/details", {
                         model: superhero,
                         user: req.user
@@ -120,6 +120,37 @@ module.exports = function({ data, io }) {
                 .catch(err => {
                     res.status(400)
                         .send(err);
+                });
+        },
+        addToFavorites(req, res) {
+            if (!req.isAuthenticated()) {
+                return res.send("User must be authenticated!");
+            }
+            let user = req.user;
+            let id = req.body.superheroId;
+            return data.addSuperheroToFavorites(id, user)
+                .then(() => {
+                    // return res.send({ result: true });
+                    return res.redirect(`/superheroes/${id}`);
+                })
+                .catch(err => {
+                    return res.send(err);
+                });
+        },
+        removeFromFavorites(req, res) {
+            if (!req.isAuthenticated()) {
+                return res.send("User must be authenticated");
+            }
+
+            let user = req.user;
+            let id = req.body.superheroId;
+
+            return data.removeSuperheroFromFavorites(id, user)
+                .then(() => {
+                    return res.redirect(`/superheroes/${id}`);
+                })
+                .catch(err => {
+                    return res.send(err);
                 });
         },
         updateSuperhero(req, res) {

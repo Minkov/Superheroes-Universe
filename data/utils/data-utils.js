@@ -133,6 +133,16 @@ module.exports = {
             });
         });
     },
+    getById(Schema, id) {
+        return new Promise((resolve, reject) => {
+            Schema.findOne({ _id: id }, (err, obj) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(obj);
+            });
+        });
+    },
     save(model) {
         return new Promise((resolve, reject) => {
             model.save(err => {

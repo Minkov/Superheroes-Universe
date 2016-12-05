@@ -121,6 +121,21 @@ module.exports = function(models) {
                     });
             });
         },
+        addSuperheroToFavorites(superheroId, user) {
+            return dataUtils.getById(Superhero, superheroId)
+                .then(superhero => {
+                    user.superheroes.push(superhero);
+                    return dataUtils.save(user);
+                });
+        },
+        removeSuperheroFromFavorites(superheroId, user) {
+            return dataUtils.getById(Superhero, superheroId)
+                .then(superhero => {
+                    let index = user.superheroes.findIndex(sh => sh.name === superhero.name);
+                    user.superheroes.splice(index, 1);
+                    return dataUtils.save(user);
+                });
+        },
         searchSuperheroes({ pattern, page, pageSize }) {
             let query = {};
             if (typeof pattern === "string" && pattern.length >= MIN_PATTERN_LENGTH) {

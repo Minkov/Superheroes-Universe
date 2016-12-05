@@ -2,18 +2,31 @@ extends ../_layout
 
 include ../_mixins/_hero-info
 
+block headScripts
+    script(src="/static/js/superhero-details.js")
 block content
     .text-center
         +hero-info(model)
-    ul.list.list-fractions
-        each fraction in model.fractions
-            li
-                a(href="/fractions/" + fraction.id)
-                    = fraction.name
-    ul.list.list-powers
-    each power in model.powers
-        li
-            a(href="/superheroes?powers=" + power.name)
-                = power.name
-    p
+        .col-xs-12
+            span
+                | created by 
+                a(href="/users?username=" + model.user.username)
+                    =   model.user.username
+    .text-center
+        span
+            | Part of
+        ul.list.list-fractions.list-horizontal
+            each fraction in model.fractions
+                li
+                    a(href="/fractions?name=" + fraction.name)
+                        = fraction.name
+    .text-center
+        span
+            | Powers:
+        ul.list.list-horizontal.list-powers
+            each power in model.powers
+                li
+                    a(href="/superheroes?powers=" + power.name)
+                        = power.name
+    p.text-center
         = model.story

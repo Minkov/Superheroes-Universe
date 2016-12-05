@@ -4,8 +4,8 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const passportSocketIo = require("passport.socketio");
 const sessionStore = require("sessionstore");
-const session = require('express-session');
-const RedisStore = require('connect-redis')(session);
+const session = require("express-session");
+const RedisStore = require("connect-redis")(session);
 
 module.exports = function({ server, data }) {
     let io = require("socket.io")(server);

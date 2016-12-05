@@ -12,5 +12,22 @@ mixin hero-info(superhero)
             a.btn.btn-danger(href= "/superheroes/" + superhero.id)
                 | View more
             if user
-                a.btn.btn-danger
-                    | Add to favorites
+                if superhero.isInFavorites
+                    form.ajax-form.add.hidden(action="/superheroes/add-to-favorites", method="post")
+                        input(type="hidden" name="superheroId" value="" + superhero._id)
+                        button.btn.btn-danger
+                            | Add to favorites
+                    form.ajax-form.remove(action="/superheroes/remove-from-favorites", method="post")
+                        input(type="hidden" name="superheroId" value="" + superhero._id)
+                        button.btn.btn-danger
+                            | Remove to favorites
+                else
+                    form.ajax-form.add(action="/superheroes/add-to-favorites", method="post")
+                        input(type="hidden" name="superheroId" value="" + superhero._id)
+                        button.btn.btn-danger
+                            | Add to favorites
+                    form.ajax-form.remove.hidden(action="/superheroes/remove-from-favorites", method="post")
+                        input(type="hidden" name="superheroId" value="" + superhero._id)
+                        button.btn.btn-danger
+                            | Remove to favorites
+                    
