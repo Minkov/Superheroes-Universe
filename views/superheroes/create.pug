@@ -13,7 +13,7 @@ block content
         .row
             .col-xs-12
                 | Powers:
-                ul.list.powers-list
+                ul.list.list-horizontal.powers-list
                     each power in model.powers
                         li
                             label
@@ -35,15 +35,18 @@ block content
         
         input.form-control(type="text" name="imageUrl" placeholder="Enter imageUrl")
         
-        label
-            | Avengers
-            input.form-control(type="checkbox" name="fractions" value="Avengers")
-        label
-            | Justice League
-            input.form-control(type="checkbox" name="fractions" value="Justice League")
-        label
-            | Bat Family
-            input.form-control(type="checkbox" name="fractions" value="Bat Family")
-
+        .row
+            .col-xs-12
+                | Factions:
+                ul.list.list-horizontal.fractions-list
+                    each fraction in model.fractions
+                        li
+                            label
+                                = fraction.name
+                                input.form-control(type="checkbox" name="fractions" value=fraction.name)
+        .row
+            .col-xs-12
+                a#btn-add-new-fraction-option(href="#")
+                    | Add new fraction
         button.btn.btn-danger
             | Submit

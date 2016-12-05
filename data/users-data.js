@@ -1,5 +1,8 @@
 /* globals module require Promise */
 
+const dataUtils = require("./utils/data-utils"),
+    mapper = require("../utils/mapper");
+
 module.exports = function(models) {
     let {
         User
@@ -17,6 +20,12 @@ module.exports = function(models) {
                     return resolve(user);
                 });
             });
+        },
+        getUserByUsername(username) {
+            return dataUtils.getByQuery(User, { username });
+        },
+        getAllUsers() {
+            return dataUtils.getAll(User);
         }
     };
 };

@@ -10,8 +10,12 @@ $(function() {
             method: method,
             data: data,
             success: function(data) {
-                $(".ajax-form.hidden").removeClass("hidden");
-                $this.addClass("hidden");
+                debugger;
+                toastr.success("Superhero updated");
+                setTimeout(function() {
+                    $(".ajax-form.hidden").removeClass("hidden");
+                    $this.addClass("hidden");
+                }, 1000);
             },
             error: function(err) {
 

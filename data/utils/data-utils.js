@@ -133,6 +133,9 @@ module.exports = {
             });
         });
     },
+    getAll(Schema) {
+        return this.getByQuery(Schema, {});
+    },
     getById(Schema, id) {
         return new Promise((resolve, reject) => {
             Schema.findOne({ _id: id }, (err, obj) => {
@@ -140,6 +143,17 @@ module.exports = {
                     return reject(err);
                 }
                 return resolve(obj);
+            });
+        });
+    },
+    getByQuery(Schema, query) {
+        return new Promise((resolve, reject) => {
+            Schema.find(query, (err, objects) => {
+                if (err) {
+                    return reject(err);
+                }
+
+                return resolve(objects);
             });
         });
     },

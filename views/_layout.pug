@@ -11,6 +11,8 @@ head
     link(rel="stylesheet", href="/static/bower_components/bootstrap/dist/css/bootstrap.css")
     //- endinject
 
+    link(rel="stylesheet", href="/static/bower_components/toastr/toastr.css")
+
     link(rel="stylesheet" href="/static/css/main.css")
     link(rel="stylesheet" href="/static/css/resets.css")
     
@@ -18,15 +20,14 @@ head
 
     script(src="/static/bower_components/jquery/dist/jquery.js")
     script(src="/static/bower_components/bootstrap/dist/js/bootstrap.js")
+    script(src="/static/bower_components/toastr/toastr.js")
 
-    script(src="/socket.io/socket.io.js")
-    script(src="/static/js/sockets.js")
     script(src="/static/js/main.js")
    
     block headScripts
 body
     header
-        +site-navigation
+        +site-navigation(user)
     #content.container
         block content
     footer.text-center

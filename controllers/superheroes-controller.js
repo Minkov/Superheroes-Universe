@@ -81,12 +81,13 @@ module.exports = function({ data, io }) {
             if (!req.isAuthenticated()) {
                 return res.redirect("/");
             }
-            return data.getPowers()
-                .then(powers => {
+            return Promise.all([data.getPowers(), data.getFractions()])
+                .then(([powers, fractions]) => {
                     return res.render("superheroes/create", {
                         user: req.user,
                         model: {
-                            powers
+                            powers,
+                            fractions
                         }
                     });
                 });

@@ -1,4 +1,4 @@
-mixin site-navigation
+mixin site-navigation(user)
     nav.navbar.navbar-default
         .container-fluid.text-center
             .navbar-header
@@ -7,13 +7,18 @@ mixin site-navigation
                     span.icon-bar
                     span.icon-bar
                     span.icon-bar
-                a.navbar-brand(href="/") The Superheroes Universe
+                a.btn-sign-outnavbar-brand(href="/") The Superheroes Universe
             #navbar-collapse.collapse.navbar-collapse
                 ul.nav.navbar-nav
                     li
-                        a(href="/superheroes") Superheroes
+                        a(href="/superheroes")
+                            | Superheroes
                     li
-                        a(href="/fractions") Fractions
+                        a(href="/fractions") 
+                            | Fractions
+                    li
+                        a(href="/users")
+                            | Users
                     if user
                         li.dropdown
                             a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
@@ -21,7 +26,7 @@ mixin site-navigation
                                 span.caret
                             ul.dropdown-menu
                                 li
-                                    a(href="#") 
+                                    a(href="/users/" + user.username) 
                                         | View profile
                                 li
                                     form(action="auth/sign-out" method="post")

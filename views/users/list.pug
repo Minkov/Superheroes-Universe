@@ -1,0 +1,8 @@
+extends ../_layout
+
+block content
+    ul.list
+        each user in model
+            li
+                a(href="/users/" + user.username)
+                    = user.username
