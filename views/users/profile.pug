@@ -3,6 +3,7 @@ include ../_mixins/_user-details
 
 block content
     .user
-        a(href="/users/edit")
-            | Edit
+        .text-center
+            a.btn.btn-danger(href="/users/edit")
+                | Edit
         +user-details(model)
