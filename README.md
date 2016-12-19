@@ -9,7 +9,7 @@ Create an application about superheroes :)
 
 - Design the models/schemas/objects for storing superheroes, fractions, powers, etc.... Mandatory use MongoDB. Mongoose is optional.
 
-- Create a application for storing superheroes and users:
+- Create an application for storing superheroes and users:
   - Each user has **username**, **display name** and image (or just a link to such)
   - Each superhero has **name**, **secret identity**, **city that protects**, **alignment** , **story**, **image**, a **list of fractions** and a **list of powers**
     - **name**:
